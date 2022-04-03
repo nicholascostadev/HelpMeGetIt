@@ -1,0 +1,315 @@
+![Course front page image](https://res.cloudinary.com/practicaldev/image/fetch/s--AVsHHDZ0--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ourr4wemmwhfrrw4hqih.png 'Course front page image')
+
+# Scrimba's introductory course to TypeScript
+
+---
+
+_PS: All I talked about here and the points I gave are from the [Scrimba's free TypeScript Introductory Course](https://scrimba.com/learn/typescript) taught by [Ania Kubów](https://www.instagram.com/aniakubow), this article is meant to give a quick explanation of the types of TypeScript and a quick review of the course. If you find any mistakes, feel free to correct me, it's my first time with TypeScript, I don't expect to be 100% correct on all my explanations._
+
+## Scheme of the course
+
+The course works with a video playing in the background, as well as the actual live code, so you can stop the recording whenever you want, run the code for yourself, make your changes to see the outputs if you want to, and also take your notes. From my experience with a udemy web development course, this kind of way of teaching was better for me. If you're a developer like me that doesn't have two monitors, it won't be a problem for you since you don't have to change between tabs, it actually saves a lot of time.
+
+## What should I know before taking this course?
+
+Intermediate knowledge in JavaScript and basic knowledge in HTML and CSS are great skills to have before starting, but if you're really interested in it and don't want to wait, this course is well planned to take you on an easy pace too.
+
+### Why TypeScript?
+
+Types are useful for not having unnecessary mistakes when using for example a function, or passing a string to an integer, and so on. Errors are also more visible since you almost always declare the types allowed.
+
+The first actual lesson is to show you the types and the "typeof" function from JavaScript and shows in a real simple code scenario what problems you could come to by not using TypeScript or defining the types using native JavaScript, the example given was a simple function
+
+
+```ts
+function addNumbers(a, b) {
+	return a + b;
+}
+```
+
+But this function also accepts string-type values, which would go wrong since its expected result is for numbers and not for concatenating strings.
+
+## 1st Section(Learn primitive types)
+
+Comparison of Types with JavaScript and TypeScript: JavaScript has those 5 main types
+
+- number
+- string
+- boolean
+- null
+- undefined
+
+TypeScript, on the other hand, has its own types and all the native JavaScript types, for example:
+
+- tuple
+- enum
+- any
+- union
+- literal
+- function
+- unknown
+- never
+- custom types
+
+Just by seeing that, we can assure TypeScript came to make our life as programmers, easier in terms of debugging and it's worth it giving it a go.
+
+### Some benefits of using TypeScript
+
+- Many errors that you might come through using JavaScript and you don't know the reason, might be easily addressed if you're using TypeScript, because of type definitions.
+- Type definitions do a kind of checking of the data received, and because of that, some times that you would get your function broken for receiving a unexpected input, you won't anymore.
+- Assigning variables with no value yet is a lot safer with TypeScript, since you can assign it an expected type before it has an initial value, like: `let count : number`, count has no initial value but only accepts numbers.
+
+## 2nd Section(Learn structural types)
+
+_PS: I'm not going to talk about all types, but I'm gonna do a quick explanation of the main ones._
+
+TypeScript's types:
+
+### _objects:_
+
+They're slightly different from JavaScript. A normal JavaScript object is written like so:
+
+```ts
+const you = {
+	userName: 'Bobby',
+	isReturning: true,
+};
+```
+
+But TypeScript doesn't understand it, you have to tell TypeScript some things about the object by defining the types each property of the object receives and you can do it that way:
+
+```ts
+const you: {
+	userName: string;
+	isReturning: boolean;
+	// We also separate the object's property types with ";",
+	// not with "," like in a normal JavaScript object.
+} = {
+	userName: 'Bobby',
+	isReturning: true,
+};
+```
+
+And also, you cannot define more variables than the variables you defined:
+
+```ts
+const you: {
+	userName: string;
+	isReturning: boolean;
+} = {
+	userName: 'Bobby',
+	isReturning: true,
+	age: 18, // Error here
+};
+```
+
+TypeScript sees an error because when we specified the type of the object's properties, we are specifying the things we must receive inside the object and the type of them, and `age` isn't one of the properties we can receive.
+
+### _Arrays:_
+
+The arrays are defined with "[]" after a type, so you have to tell TypeScript the type of the content inside the array. e.g:
+
+```ts
+const you: {
+    firstName: string;
+    lastName: string;
+    isReturning: boolean;
+    age: number;
+    stayedAt: string[]; <----
+} = {
+    firstName: 'Bobby',
+    lastName: 'Brown',
+    isReturning: true,
+    age: 35,
+    stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
+}
+```
+
+When we add an array, we define its type, and since the array has only strings, we put "string" + "[]" to say it's an array of strings only.
+
+### _Union:_
+
+The union makes possible to add types, so let's take the last example and make a slight change.
+
+```ts
+const you: {
+    firstName: string;
+    lastName: string;
+    isReturning: boolean;
+    age: number;
+    stayedAt: (string | number)[];  <--
+} = {
+    firstName: 'Bobby',
+    lastName: 'Brown',
+    isReturning: true,
+    age: 35,
+    stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow', 23]
+}
+```
+
+Now, the array can also accept numbers, by using the "|" with the other type(`(string | number)`)
+
+### _Tuples:_
+
+Tuples are an Array-like type, but you have to specify each of the property's types with its correct position. e.g:
+
+```ts
+let currentLocation: [string, string, number] = ['London', '11:35', 17];
+```
+
+`currentLocation` is defined to have a string on the index 0, a string on the index 1, and a number on the index 2.
+
+### _Enum:_
+
+Enum creates a custom type, lets take this object for example:
+
+```ts
+const ADMIN = 'admin';
+const READ_ONLY = 'read-only';
+
+const you = {
+	firstName: 'Bobby',
+	lastName: 'Brown',
+	permissions: ADMIN,
+	isReturning: true,
+	age: 35,
+	stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
+};
+```
+
+The `permissions` property is assigned to the variable `ADMIN`, and it makes it possible for `permissions` to accept any string, and that's not what we want to, we want to specify the possibilities so that it cannot be broken.
+
+**Solution:**
+
+```ts
+enum Permissions {
+	ADMIN,
+	READ_ONLY,
+}
+
+const you = {
+	firstName: 'Bobby',
+	lastName: 'Brown',
+	permissions: Permissions.ADMIN,
+	isReturning: true,
+	age: 35,
+	stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow'],
+};
+```
+
+Now it only accepts Permissions' properties, so it doesn't accept all strings, only the ones defined in the enum.
+
+### _Any:_
+
+Whenever you don't want a particular value to cause type checking errors, you can use this type, but it's not really recommended because you're using TypeScript to narrow the possibilities and reduce errors.
+
+### _Literal:_
+
+You define this type with the exact word "type" + the name of the variable. e.g:
+
+```ts
+type Price = 100 | 75 | 50;
+```
+
+What you're doing here is that you set the type alias "Price" to only accept numbers that are equal to the given numbers(100, 75, 50) _PS: you separate the values with the "|"(union type)_.
+
+So you have this block of code:
+
+```ts
+type Price = 100, 75, 50
+
+const products : {
+    price: Price
+}[] = [
+    {
+        price: 100 <--
+    }
+]
+```
+
+This price is accepted because it's one of the values the type alias "Price" defined that was allowed, if the price was another number than 100, 75, 50, it would throw us an error.
+
+### _Function and Void:_
+
+Functions can have different returns, so if you're working as a team or just want to make your code cleaner, you can define what type of return should the function have.
+
+First example: There is this function, that doesn't have an explicit type set:
+
+```ts
+function add(firstValue: number, secondValue: number) {
+	return firstValue + secondValue;
+}
+```
+
+TypeScript has the knowledge to detect that the return value should be a number, but you can specify it if wanted, by adding ":" + the type, before the function's body:
+
+```ts
+function add(firstValue: number, secondValue: number): number {
+	return firstValue + secondValue;
+}
+```
+
+By defining explicitly, it can make your code a lot more understandable for other people(This is a simple example, but you can think about lots of other different cases).
+
+#### void
+
+If the function has nothing being returned, the type is declared as "Void".
+
+### _Interfaces:_
+
+This type is useful because if you use many different times the same object structure, you would have to define the types every single time again, but with Interfaces, this effort is solved in a simple way, by just creating a "variable":
+
+Instead of writing
+
+```ts
+const reviews: {
+	// ... The structure of the object
+}[] = [
+	{
+		// ... The values
+	},
+];
+```
+
+You can create an interface like that and use it
+
+```ts
+interface Review {
+	name: string;
+	stars: number;
+	date: string;
+}
+
+const reviews: Review[] = [
+	{
+		// ... The values
+	},
+];
+```
+
+So now, the array of objects "reviews", takes the structure of "Review".
+
+### _Classes:_
+
+Classes in TypeScript are a bit different, you need to specify the type of the variables you're going to assign inside the constructor:
+
+```ts
+class Car {
+     make: string // Assign the type before
+     year: number // Assign the type before
+     color: string // Assign the type before
+     constructor(make: string, year: number, color: string {
+         this.make = make <--
+         this.year = year <--
+         this.color = color <--
+     }
+ }
+```
+
+## Final Review
+
+The entire course, the teaching of [Ania Kubów](https://www.instagram.com/aniakubow) was really great and all the exercises were focused on TypeScript like it was supposed to. And this course really taught me why should I use TypeScript, and that made me want to know more, I would really advise you to take it if you're a complete beginner in TypeScript like me, because it gives you a great kickstart.
+
+**I'm going to make more posts on what I'm currently learning and I hope you readers find it interesting, your feedback is always appreciated.**
+
+Hope you found this article useful, thanks for reading until the end =D.
