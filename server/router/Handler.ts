@@ -65,6 +65,7 @@ router.post('/api/register', async (req, res) => {
 
 router.post('/api/login', async (req, res) => {
 	const Users = Schemas.Users;
+	console.log(req.body);
 
 	const user: { email: string; password: string } = {
 		email: req.body.email,

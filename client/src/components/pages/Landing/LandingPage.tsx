@@ -161,8 +161,8 @@ function LandingPage() {
 								>
 									<Text sx={{ fontSize: '2rem' }}>
 										Entre para a comunidade, encontre resumos e respostas para
-										assuntos importantes do mundo da programação ou ajuda você
-										mesmo outras pessoas.
+										assuntos importantes do mundo da programação ou ajude outras
+										pessoas.
 										<MediaQuery
 											smallerThan="sm"
 											styles={{ fontSize: '1.5rem' }}

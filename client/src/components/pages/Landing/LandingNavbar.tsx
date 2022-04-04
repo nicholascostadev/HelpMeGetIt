@@ -1,6 +1,7 @@
 import { ActionIcon, Box, Button, Header, Text } from '@mantine/core';
 import styled from 'styled-components';
 import LightDarkButton from '../../LightDarkButton';
+import { Link } from 'react-router-dom';
 
 function LandingNavbar() {
 	return (
@@ -15,7 +16,7 @@ function LandingNavbar() {
 						HelpMeGetIt
 					</Text>
 					<Box sx={{ display: 'flex', alignItems: 'center' }}>
-						<Button mr="md" size="sm">
+						<Button mr="md" size="sm" component={Link} to="/login">
 							Login
 						</Button>
 						<ActionIcon>

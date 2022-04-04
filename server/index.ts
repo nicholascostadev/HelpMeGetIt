@@ -3,11 +3,13 @@ import routesHandler from './router/Handler';
 import express from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import cors from 'cors';
 
 const app = express();
 
 const PORT = 5004;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', routesHandler);
