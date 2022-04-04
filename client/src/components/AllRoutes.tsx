@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppShellComponent from './AppShellComponent';
 import Home from './pages/Home';
-import LandingPage from './pages/LandingPage';
+import LandingPage from './pages/Landing/LandingPage';
 
 function AllRoutes() {
 	return (

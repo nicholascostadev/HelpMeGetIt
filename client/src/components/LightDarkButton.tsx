@@ -15,8 +15,8 @@ function LightDarkButton() {
 			<Tooltip
 				label={
 					dark
-						? `Change to light mode [Ctrl + J or ⌘ + J]`
-						: 'Change to dark mode  [Ctrl + J or ⌘ + J]'
+						? `Mudar para modo claro [Ctrl + J ou ⌘ + J]`
+						: 'Mudar para modo escuro  [Ctrl + J ou ⌘ + J]'
 				}
 				withArrow
 			>
