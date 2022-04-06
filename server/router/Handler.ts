@@ -9,6 +9,8 @@ import { User } from '../interfaces';
 let saltRounds: number = parseInt(process.env.SALT_ROUNDS!);
 
 router.post('/api/register', async (req, res) => {
+	const UsersList = Schemas.UsersList;
+
 	const user: User = {
 		name: req.body.name,
 		email: req.body.email,
@@ -38,6 +40,13 @@ router.post('/api/register', async (req, res) => {
 				newUser.save((error: any, newUserResults) => {
 					if (!error) {
 						// Check if everything went right
+						const userAddedToList = new UsersList({
+							email: hashedUser.email,
+							name: hashedUser.name,
+						});
+
+						userAddedToList.save();
+
 						res.send({
 							status: 'ok',
 						});

@@ -5,3 +5,9 @@ export interface User {
 	password: string;
 	date?: Date;
 }
+
+export interface UserList {
+	name?: string;
+	email: string;
+	date?: Date;
+}
