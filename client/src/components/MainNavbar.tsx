@@ -1,17 +1,33 @@
-import { Collapse, Navbar, Text } from '@mantine/core';
+import {
+	Avatar,
+	Box,
+	Button,
+	Collapse,
+	MediaQuery,
+	Navbar,
+	Text,
+} from '@mantine/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, ChevronRight } from 'tabler-icons-react';
 
 function MainNavbar({
 	collapse,
 	setCollapse,
 	opened,
+	setOpened,
 }: {
 	collapse: boolean;
 	setCollapse: Function;
 	opened: boolean;
+	setOpened: Function;
 }) {
+	let navigate = useNavigate();
+	const logout = () => {
+		localStorage.removeItem('token');
+		navigate('/login');
+	};
+
 	return (
 		<Navbar
 			p="md"
@@ -19,7 +35,40 @@ function MainNavbar({
 			hidden={!opened}
 			width={{ sm: 200, lg: 300 }}
 		>
-			<Navbar.Section mt="lg" mb="lg">
+			<Navbar.Section my="lg" sx={{ display: 'none' }}>
+				<MediaQuery
+					smallerThan="sm"
+					styles={{
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignContent: 'center',
+					}}
+				>
+					<Box sx={{ display: 'none' }}>
+						<Avatar
+							mx="lg"
+							my="md"
+							size="lg"
+							src={null}
+							color="blue"
+							radius="xl"
+							component={Link}
+							to="/home"
+							sx={{ alignSelf: 'center' }}
+						/>
+						<Button
+							size="sm"
+							mx="sm"
+							onClick={logout}
+							sx={{ width: '200px', alignSelf: 'center' }}
+						>
+							Logout
+						</Button>
+					</Box>
+				</MediaQuery>
+			</Navbar.Section>
+			<Navbar.Section my="lg">
 				{collapse ? (
 					<Text style={{ display: 'flex', alignItems: 'center' }} size="lg">
 						Subjects
@@ -43,17 +92,17 @@ function MainNavbar({
 					transitionTimingFunction="linear"
 					transitionDuration={150}
 				>
-					<Text>
+					<Text onClick={() => setOpened((o: boolean) => !o)}>
 						<Text component={Link} to="/about" variant="link">
 							Example
 						</Text>
 					</Text>
-					<Text>
+					<Text onClick={() => setOpened((o: boolean) => !o)}>
 						<Text component={Link} to="/calendarPage" variant="link">
 							calendarPage
 						</Text>
 					</Text>
-					<Text>
+					<Text onClick={() => setOpened((o: boolean) => !o)}>
 						<Text component={Link} to="/notificationComponent" variant="link">
 							Notification Component
 						</Text>

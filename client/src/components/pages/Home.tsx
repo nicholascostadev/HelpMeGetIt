@@ -47,6 +47,7 @@ function AppShellComponent() {
 						collapse={collapse}
 						setCollapse={setCollapse}
 						opened={opened}
+						setOpened={setOpened}
 					/>
 				}
 				aside={
@@ -63,21 +64,23 @@ function AppShellComponent() {
 				}
 				header={<MainHeader opened={opened} setOpened={setOpened} />}
 			>
-				<Paper m="0 15%" p="0 5%">
-					<Title>
-						Seja bem vindo ao
-						<Text
-							variant="gradient"
-							gradient={{ from: 'red', to: 'blue' }}
-							inherit
-							component="span"
-							m={'0 5px'}
-						>
-							HelpMeGetIt
-						</Text>
-						, para navegar pelo site basta usar a aba de navegação ao lado
-						esquerdo.
-					</Title>
+				<Paper m="0 5%" p="0 5%">
+					<MediaQuery smallerThan="sm" styles={{ fontSize: '1.5rem' }}>
+						<Title>
+							Seja bem vindo ao
+							<Text
+								variant="gradient"
+								gradient={{ from: 'red', to: 'blue' }}
+								inherit
+								component="span"
+								m="0 5px"
+							>
+								HelpMeGetIt
+							</Text>
+							, para navegar pelo site basta usar a aba de navegação ao lado
+							esquerdo.
+						</Title>
+					</MediaQuery>
 				</Paper>
 			</AppShell>
 		</div>

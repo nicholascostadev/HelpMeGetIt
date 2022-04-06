@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function LandingNavbar() {
 	return (
 		<>
-			<Header height={70}>
+			<Header height={80}>
 				<NavWrapper>
 					<Text
 						variant="gradient"

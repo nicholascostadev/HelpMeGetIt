@@ -25,17 +25,19 @@ router.post('/api/register', async (req, res) => {
 	}
 
 	try {
+		//	Hash user's password
 		bcrypt.genSalt(saltRounds, (err, salt) => {
-			bcrypt.hash(user.password, salt, async (err, hash) => {
+			bcrypt.hash(user.password, salt, (err, hash) => {
 				const hashedUser = {
 					name: user.name,
 					email: user.email,
 					password: hash,
 				};
 				const newUser = new Schemas.Users(hashedUser);
-
-				await newUser.save((error: any, newUserResults) => {
+				// await to save a new user
+				newUser.save((error: any, newUserResults) => {
 					if (!error) {
+						// Check if everything went right
 						res.send({
 							status: 'ok',
 						});
@@ -43,7 +45,7 @@ router.post('/api/register', async (req, res) => {
 						if (error.code === 11000) {
 							res.send({
 								status: 'error',
-								error: 'Email já está em uso',
+								error: 'Email already in use',
 							});
 						} else {
 							res.send({
@@ -55,17 +57,13 @@ router.post('/api/register', async (req, res) => {
 				});
 			});
 		});
-	} catch (err: any) {
-		res.send({
-			status: 'error',
-			error: err.message,
-		});
+	} catch (err) {
+		console.log(err);
 	}
 });
 
 router.post('/api/login', async (req, res) => {
 	const Users = Schemas.Users;
-	console.log(req.body);
 
 	const user: { email: string; password: string } = {
 		email: req.body.email,

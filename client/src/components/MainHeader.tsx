@@ -1,4 +1,5 @@
 import {
+	Avatar,
 	Burger,
 	Button,
 	Header,
@@ -48,50 +49,64 @@ function MainHeader({
 	};
 
 	return (
-		<Header height={70} p="md">
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-				}}
-			>
-				<MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-					<Burger
-						opened={opened}
-						onClick={() => setOpened((o: boolean) => !o)}
-						size="sm"
-						color={theme.colors.gray[6]}
-						mr="xl"
-					/>
-				</MediaQuery>
-
-				<Text
-					component={Link}
-					to="/"
+		<MediaQuery smallerThan="sm" styles={{ padding: '1rem 8%' }}>
+			<Header height={80} p="1rem 20%">
+				<div
 					style={{
-						fontSize: '1.5rem',
-						fontFamily: "'Roboto', serif",
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center',
 					}}
-					variant="gradient"
-					gradient={{ from: 'red', to: 'blue' }}
-					weight="bold"
 				>
-					HelpMeGetIt
-				</Text>
+					<MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+						<Burger
+							opened={opened}
+							onClick={() => setOpened((o: boolean) => !o)}
+							size="sm"
+							color={theme.colors.gray[6]}
+							mr="xl"
+						/>
+					</MediaQuery>
 
-				<HeaderItemsWrapper>
-					{token && (
-						<MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
-							<Button size="md" onClick={logout}>
-								Logout
-							</Button>
-						</MediaQuery>
-					)}
-					<LightDarkButton />
-				</HeaderItemsWrapper>
-			</div>
-		</Header>
+					<Text
+						component={Link}
+						to="/home"
+						style={{
+							fontSize: '2rem',
+							fontFamily: "'Roboto', serif",
+						}}
+						variant="gradient"
+						gradient={{ from: 'red', to: 'blue' }}
+						weight="bold"
+					>
+						HelpMeGetIt
+					</Text>
+
+					<HeaderItemsWrapper>
+						{token && (
+							<>
+								<MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+									<Button size="sm" mx="sm" onClick={logout}>
+										Logout
+									</Button>
+								</MediaQuery>
+								<MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+									<Avatar
+										mx="lg"
+										src={null}
+										color="blue"
+										radius="xl"
+										component={Link}
+										to="/home"
+									/>
+								</MediaQuery>
+							</>
+						)}
+						<LightDarkButton />
+					</HeaderItemsWrapper>
+				</div>
+			</Header>
+		</MediaQuery>
 	);
 }
 

@@ -219,6 +219,7 @@ function Register() {
 									rightIcon={success ? <Check /> : <User />}
 									loading={loading}
 									loaderPosition="right"
+									color={success ? 'green' : 'blue'}
 									size="md"
 									fullWidth
 									disabled={color === 'teal' ? false : true}

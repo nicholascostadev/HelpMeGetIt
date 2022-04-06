@@ -11,6 +11,7 @@ import {
 	useMantineTheme,
 	useMantineColorScheme,
 	Collapse,
+	ScrollArea,
 } from '@mantine/core';
 import LightDarkButton from './LightDarkButton';
 import { ChevronDown, ChevronRight } from 'tabler-icons-react';
@@ -72,6 +73,7 @@ function AppShellComponent() {
 				navbar={
 					<MainNavbar
 						opened={opened}
+						setOpened={setOpened}
 						collapse={collapse}
 						setCollapse={setCollapse}
 					/>
